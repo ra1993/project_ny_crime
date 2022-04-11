@@ -1,12 +1,9 @@
 import os
-from readline import append_history_file
 import sys
 import psycopg2
 
 app_home = r"/home/richarda/Projects/udacity_projects/project_ny_crime/"
 sys.path.append(app_home)
-
-from spark_dir import spark_tables
 
 #---get db connection
 def create_db_conn():
@@ -67,4 +64,4 @@ if __name__ == "__main__":
     # for table_st in create_table_queries:
     #      create_table(conn, cur, table_st)
     # for ins_tbl in insert_table_queries:
-    print(df_list)
+   

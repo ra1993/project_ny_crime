@@ -1,12 +1,11 @@
 import sys
 import os
-
+#to allow the pg_etl module to use spark_tables
+# from .spark_main import *
 from spark_main import *
-
 #Not using school demo, 
 NY_CRIME_PATH =  r'/home/richarda/datasets/ny_crime_datasets/ny_crime_data_main/NYPD_Complaint_Data_Historic.csv'
 NY_ARREST_PATH = r'/home/richarda/datasets/ny_crime_datasets/ny_arrest_data_main2/NYPD_Arrests_Data__Historic_.csv'
-
 
 #Loading config data
 # config = configparser.ConfigParser()

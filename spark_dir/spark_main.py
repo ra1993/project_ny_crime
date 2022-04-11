@@ -1,4 +1,9 @@
+#so spark main can import spark tables
+# from spark_tables import *
 from spark_tables import *
+#to get pg_etl.py to be able to use this module
+# from .spark_tables import *
+#so spark main can import spark tables
 
 import findspark
 findspark.init()
@@ -9,6 +14,7 @@ from pyspark import SparkContext, SparkConf
 from pyspark.sql import SparkSession
 
 MASTER_IP_ADDR= "192.168.0.179"
+
 #Creating spark context object
 sc = pyspark.SparkContext.getOrCreate()
 #first component of a spark program is spark context

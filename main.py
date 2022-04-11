@@ -2,14 +2,19 @@ import pandas as pd
 import numpy as np
 
 import sys
+app_home = r"/home/richarda/Projects/udacity_projects/project_ny_crime/"
+sys.path.append(app_home)
 
-# sys.path.append(r'/home/richarda/Projects/udacity_projects/project_ny_crime/spark_dir')
-
+# from spark_dir.spark_main import *
+from spark_dir.spark_tables import *
+from pg_data_dir.pg_etl import *
+from pg_data_dir.sql_queries import *
 import configparser
 # from aws.config import *
-# from spark_files.spark_script import *
 
 test_print = "This is test print for main"
 
 if __name__ == "__main__":
-    print(test_print)
+    # print(crime_fact_insert)
+    print(df_list)
+    

@@ -2,9 +2,6 @@ import os
 import sys
 import psycopg2
 
-app_home = r"/home/richarda/Projects/udacity_projects/project_ny_crime/"
-sys.path.append(app_home)
-
 #---get db connection
 def create_db_conn():
     try:
@@ -18,7 +15,7 @@ def create_db_conn():
 def create_cursor(conn_obj):
     try:
         cur = conn_obj.cursor()
-        conn.commit()
+        conn_obj.commit()
     except psycopg2.Error as e:
         print("Error: Couldn't create cursor object!")
         print(e)
@@ -56,12 +53,10 @@ def insert_data(conn, cur, df, sql_st):
     else:
         return "Data was loaded!"
 
-
 if __name__ == "__main__":
     conn = create_db_conn()
     cur = create_cursor(conn)
     #Inserting schema
     # for table_st in create_table_queries:
     #      create_table(conn, cur, table_st)
-    # for ins_tbl in insert_table_queries:
-   
+    pass

@@ -4,12 +4,14 @@ import numpy as np
 import sys
 from spark_dir.spark_main import *
 from spark_dir.spark_tables import *
+from spark_dir.spark_util import *
+
 from pg_data_dir.pg_etl import *
 from pg_data_dir.sql_queries import *
 import configparser
 # from aws.config import *
 
-test_print = "This is test print for main"
+
 
 if __name__ == "__main__":
     #lists spark program's info

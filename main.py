@@ -29,7 +29,10 @@ if __name__ == "__main__":
     # print(insert_table_queries)
     # for idx, ins_tbl in enumerate(insert_table_queries):
     #     insert_data(conn, cur, df_list[idx], ins_tbl)
-    # pass
+    spark.sql('''SELECT * 
+              FROM crime_fact
+              LIMIT 2''').show()
     # print(df_list)
-    print(df_size_report(df_list))
-    print(len(df_list), len(insert_table_queries))
+    # print(df_size_report(df_list))
+    # print(len(df_list), len(insert_table_queries))
+    # pass

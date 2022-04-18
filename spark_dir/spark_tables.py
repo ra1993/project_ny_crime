@@ -1,4 +1,4 @@
-from spark_dir.spark_main import read_spark_data
+from spark_dir.spark_util import read_spark_data
 # from . import spark_main
 
 import sys

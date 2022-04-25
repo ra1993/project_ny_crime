@@ -3,8 +3,8 @@ from httplib2 import Http
 from oauth2client import client, file, tools
 
 #defining path variables:
-client_secret_file_path = '/home/ra-terminal/Desktop/projects/project_ny_crime/g_drive_dir/credentials/client_secret_995747802585-mnfn1n2ikepcgn9a0k8nh8s7qu2tno51.apps.googleusercontent.com.json'
-credentials_file_path = '/home/ra-terminal/Desktop/projects/project_ny_crime/g_drive_dir/credentials/credentials.json'
+client_secret_file_path = '/home/ra-terminal/api_keys/google_key/credentials/client_secret_key.googleusercontent.com.json'
+credentials_file_path = '/home/ra-terminal/api_keys/google_key/credentials/credentials.json'
 
 #define api scope
 SCOPE = 'https://www.googleapis.com/auth/drive'
@@ -22,7 +22,7 @@ def get_cred_access(client_secret_file_path, credentials_file_path):
     except GoogleDriveConnection.Error:
         print("Unable to get credential access to drive api")
     else:
-        print("Successful Connection: Creds:",credentials)
+        # print("Successful Connection: Creds:",credentials)
         return credentials
 
     

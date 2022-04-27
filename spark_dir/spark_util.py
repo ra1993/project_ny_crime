@@ -1,7 +1,9 @@
 from spark_dir.spark_main import spark
+from pyspark import SparkFiles
 
 def read_spark_data(file_path):
-    return spark.read.csv(file_path, header=True)
+    # return spark.read.csv(file_path, header=True, inferSchema=True)
+    return spark.read.csv("file://"+SparkFiles.get(file_path), header=True, inferSchema=True)
 
 def print_schema(df):
     return df.printSchema()

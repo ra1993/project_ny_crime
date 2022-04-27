@@ -12,7 +12,6 @@ fonttools = "==4.31.2"
 kiwisolver = "==1.4.2"
 matplotlib = "==3.5.1"
 postgres = "==4.0"
-psycopg2 = "==2.9.3"
 psycopg2-binary = "==2.9.3"
 psycopg2-pool = "==1.1"
 py4j = "==0.10.9.3"
@@ -23,6 +22,10 @@ pytz = "==2022.1"
 six = "==1.16.0"
 typing-extensions = "==4.1.1"
 Pillow = "==9.1.0"
+"google.colab" = "*"
+mtls = "*"
+googletrans = "*"
+google-auth = "*"
 
 [dev-packages]
 

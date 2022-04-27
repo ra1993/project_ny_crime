@@ -1,5 +1,8 @@
 from spark_dir.spark_util import read_spark_data
-# from . import spark_main
+from g_drive import *
+from google.colab import drive
+
+drive.mount('/content/drive')
 
 import sys
 import os
@@ -8,18 +11,24 @@ import os
 #Not using school demo, 
 #NY_CRIME_PATH =  r'/home/richarda/datasets/ny_crime_datasets/ny_crime_data_main/NYPD_Complaint_Data_Historic.csv'
 #NY_ARREST_PATH = r'/home/richarda/datasets/ny_crime_datasets/ny_arrest_data_main2/NYPD_Arrests_Data__Historic_.csv'
+# NY_CRIME_PATH = ''
+# NY_ARREST_PATH = ''
 
-NY_CRIME_PATH = ''
-NY_ARREST_PATH = ''
 
-#Loading config data
-# config = configparser.ConfigParser()
-# config.read('aws.cfg')
-# os.environ['AWS_ACCESS_KEY_ID']=['AWS']['AWS_ACCESS_KEY_ID']
-# os.environ['AWS_SECRET_ACCESS_KEY']=config['AWS']['AWS_SECRET_ACCESS_KEY']
+#importing from google drive
+crime_file_data = search_file('NYPD_Complaint_Data_Historic.csv')
+crime_file_id = crime_file_data.get('id')
+arrest_file_id = search_file('NYPD_Arrests_Data__Historic_.csv')
+arrest_file_id = arrest_file_id.get('id')
 
-ny_crime_df = read_spark_data(NY_CRIME_PATH)
-ny_arrest_df = read_spark_data(NY_ARREST_PATH)
+print(crime_file_id, "<-------------------->", arrest_file_id)
+NY_CRIME_URL = f'https://drive.google.com/uc?export=download&id={crime_file_id}'
+# NY_CRIME_URL = f'/content/drive/My Drive/Datasets/ny_crime_data/ny_crime_info_data/NYPD_Complaint_Data_Historic.csv' 
+# NY_ARREST_URL = f'/content/drive/My Drive/Datasets/ny_crime_data/ny_arrest_data/NYPD_Arrests_Data_Historic_.csv'
+NY_ARREST_URL = f'https://drive.google.com/uc?export=download&id={arrest_file_id}'
+
+ny_crime_df = read_spark_data(NY_CRIME_URL)
+ny_arrest_df = read_spark_data(NY_ARREST_URL)
 
 
 # exploring new_york_crime_data and building tables

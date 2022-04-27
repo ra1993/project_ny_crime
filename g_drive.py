@@ -1,6 +1,7 @@
 from apiclient import discovery
 from httplib2 import Http
 from oauth2client import client, file, tools
+
 import json
 
 #defining path variables:
@@ -64,10 +65,10 @@ def search_file(file_target):
         data_files = json.load(f_obj)
     for file in data_files:
         if file.get('name') == file_target:
-            return f"File: {file.get('name')} exists! \n {file}"
+            # return file.get('kind'), file.get('id'), file.get('name'), file.get('mimeType')
+            return file
+
 
 if __name__ == "__main__":
     credentials = get_cred_access(credentials, client_secret_file_path, credentials_file_path)
     print(credentials)
-    print(search_file('NYPD_Complaint_Data_Historic.csv'))
-    pass

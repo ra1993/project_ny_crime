@@ -1,9 +1,14 @@
+from os import access
 from spark_dir.spark_main import spark
 from pyspark import SparkFiles
+from g_drive import get_gtoken
+import requests
 
-def read_spark_data(file_path):
-    # return spark.read.csv(file_path, header=True, inferSchema=True)
-    return spark.read.csv("file://"+SparkFiles.get(file_path), header=True, inferSchema=True)
+
+def read_spark_data(file_path, file_id):
+    access_token = get_gtoken()
+    
+    return spark.read.csv(file_path, header=True)
 
 def print_schema(df):
     return df.printSchema()

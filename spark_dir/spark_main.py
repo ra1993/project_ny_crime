@@ -6,8 +6,12 @@ import pyspark
 from pyspark import SparkContext, SparkConf
 from pyspark.sql import SparkSession
 
+def get_ip():
+        with open('/home/ra-terminal/api_keys/google_key/i.p_address') as f_obj:
+                i_p_addr = f_obj.readlines()[0]
+        return i_p_addr
 
-MASTER_IP_ADDR= "192.168.0.179"
+MASTER_IP_ADDR= get_ip()
 
 #first component of a spark program is spark context
 #spark context is the entrypoint for spark functionality and connects cluster with application
@@ -33,4 +37,5 @@ sc = pyspark.SparkContext.getOrCreate()
 
 if __name__ == "__main__":
     # print(df_size_report(df_list))
+#     print(MASTER_IP_ADDR)
     pass

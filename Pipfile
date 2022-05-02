@@ -26,6 +26,7 @@ Pillow = "==9.1.0"
 mtls = "*"
 googletrans = "*"
 google-auth = "*"
+fsspec = "*"
 
 [dev-packages]
 

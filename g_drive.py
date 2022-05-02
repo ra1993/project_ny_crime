@@ -3,6 +3,16 @@ from httplib2 import Http
 from oauth2client import client, file, tools
 
 import json
+import pickle
+import os
+import pandas as pd
+import requests
+import io
+
+# from googleapiclient.discover import build
+# from google_auth_oauthlib.flow import InstalledAppFlow
+# from google.auth.transport.requests import Request
+# from tabulate import tabulate
 
 #defining path variables:
 client_secret_file_path = '/home/ra-terminal/api_keys/google_key/credentials/client_secret_key.googleusercontent.com.json'
@@ -10,12 +20,16 @@ credentials_file_path = '/home/ra-terminal/api_keys/google_key/credentials/crede
 
 #define api scope
 SCOPE = 'https://www.googleapis.com/auth/drive'
-DATASET_DIR_ID = '1xqZTsmkulmx7I0rVvgGP250o8A4rbZGS' 
+SCOPE2 = 'https://www.googleapis.com/auth/drive.readonly'
 
 # define store
 store = file.Storage(credentials_file_path)
 #get access token
 credentials = store.get()
+
+# define API service
+http = credentials.authorize(Http())
+drive = discovery.build('drive', 'v3', http=http)
 
 def get_cred_access(credentials, client_secret_file_path, credentials_file_path):
 
@@ -30,9 +44,11 @@ def get_cred_access(credentials, client_secret_file_path, credentials_file_path)
         # print("Successful Connection: Creds:",credentials)
         return credentials
 
-# define API service
-http = credentials.authorize(Http())
-drive = discovery.build('drive', 'v3', http=http)
+def get_gtoken():
+    with open('/home/ra-terminal/api_keys/google_key/credentials/credentials.json') as f_obj:
+        cred = json.load(f_obj)
+    
+    return cred['access_token']
 
 # define a function to retrieve all files
 def get_all_files(api_service):
@@ -68,7 +84,30 @@ def search_file(file_target):
             # return file.get('kind'), file.get('id'), file.get('name'), file.get('mimeType')
             return file
 
+def read_csv_file(file_name):
+    file = search_file('NYPD_Complaint_Data_Historic.csv')
+    crime_file_id = file['id']
+
+    access_token = get_gtoken()
+    url = "https://googleapis.com/drive/v3/files/" + crime_file_id + "?alt=media"
+    res = requests.get(url, headers={"Authorization": "Bearer" + access_token})
+    print(res.text)
+    df = pd.read_csv(io.StringIO(res.text))
+    return df 
+
+# def get_g_file():
+#     file = driv
+#     request = drive_service.files().get_media(fileId=crime_file_id)
+#     fh = io.BytesIO()
+#     downloader = MediaIoBaseDownload(fh, request)
+#     done = False
+#     while done is False:
+#         status, done = downloader.next_chunk()
+
+#         print("Download %d%%.", int(status.progress()*100))
 
 if __name__ == "__main__":
     credentials = get_cred_access(credentials, client_secret_file_path, credentials_file_path)
-    print(credentials)
+    # get_all_files(drive)
+    # print(search_file('NYPD_Complaint_Data_Historic.csv'))
+    print(read_csv_file('NYPD_Complaint_Data_Historic.csv'))

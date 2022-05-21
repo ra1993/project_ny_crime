@@ -11,6 +11,9 @@ from pg_data_dir.sql_queries import *
 import configparser
 # from aws.config import *
 
+from g_drive import *
+from py_drive_dir.py_drive import *
+
 
 
 if __name__ == "__main__":
@@ -20,7 +23,8 @@ if __name__ == "__main__":
     
     conn = create_db_conn()
     cur = create_cursor(conn)
-    
+    df = read_in_pandas('NYPD_Complaint_Data_Historic.csv')
+    print(df)
     # print(crime_fact.print_schema())
     # print(get_log_by_filter(crime_fact, "boro", "queens"))
     # print(crime_fact_insert)
@@ -29,9 +33,9 @@ if __name__ == "__main__":
     # print(insert_table_queries)
     # for idx, ins_tbl in enumerate(insert_table_queries):
     #     insert_data(conn, cur, df_list[idx], ins_tbl)
-    spark.sql('''SELECT * 
-              FROM crime_fact
-              LIMIT 2''').show()
+    # spark.sql('''SELECT * 
+    #           FROM crime_fact
+    #           LIMIT 2''').show()
     # print(df_list)
     # print(df_size_report(df_list))
     # print(len(df_list), len(insert_table_queries))
